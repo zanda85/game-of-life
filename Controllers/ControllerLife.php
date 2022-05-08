@@ -2,7 +2,7 @@
 
 define('R', 4);
 define('C', 8);
-define('path_file_pattern', './initial_struct.csv');
+define('path_file_pattern', './data/initial_struct.csv');
 
 
 

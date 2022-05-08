@@ -14,7 +14,7 @@ $view = new View($controller);
 #View gd
 echo $view->outputbg();
 
-#View console
+#View console, decomentare per vedere l'output in debug console 
 #echo $view->output();
 
 //after view set pattern file

@@ -41,7 +41,7 @@ class bg
 class View
 {
 
-    private $matrix;
+    
     private $controller;
 
     public function __construct($controller)

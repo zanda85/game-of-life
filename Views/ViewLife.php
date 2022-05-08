@@ -47,6 +47,14 @@ class View
     public function __construct($controller)
     {
         $this->controller = $controller;
+
+        #
+        #View gd
+        echo $this->outputbg();
+
+        #View console
+        #echo $view->output();
+
     }
 
     public function outputbg()
@@ -59,7 +67,7 @@ class View
         $bgobj->create_img(C, R, 20);
 
 
-        // create reactangle
+        // create reactangles
         for ($i = 0; $i <= R - 1; ++$i) {
             for ($j = 0; $j <= C - 1; ++$j) {
                 if ($this->controller->matrix_cells[$i][$j] == "*") {

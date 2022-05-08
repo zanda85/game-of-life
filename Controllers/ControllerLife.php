@@ -1,7 +1,6 @@
 <?php
 
-define('R', 4);
-define('C', 8);
+
 define('path_file_pattern', './data/initial_struct.csv');
 
 
@@ -27,6 +26,11 @@ class ControllerLife
   {
     //map csv to array
     $this->matrix_cells = array_map('str_getcsv', file(path_file_pattern));
+    $maxR = sizeof($this->matrix_cells); //number of rows in the pattern
+    $maxC = sizeof($this->matrix_cells[0]); //number of columns in the pattern
+    define('R', $maxR);
+    define('C', $maxC);
+    
   }
 
   public function set_pattern()

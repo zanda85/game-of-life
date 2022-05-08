@@ -5,11 +5,13 @@ include "./Views/ViewLife.php";
 $controller = new ControllerLife();
 $view = new View($controller);
 
-//View bg
+echo "ciao";
+
+#View gd
 echo $view->outputbg();
 
-//View console
-//echo $view->output();
+#View console
+#echo $view->output();
 
 //after view set pattern file
 $controller->set_pattern();

@@ -19,22 +19,29 @@ class ControllerLife
 
     //generate new lifw
     $this->newGeneration();
+
+    //set pattern
+    $this->set_pattern();
   }
+
 
 
   public function get_pattern()
   {
+    #prelievo del pattern dal file
     //map csv to array
     $this->matrix_cells = array_map('str_getcsv', file(path_file_pattern));
     $maxR = sizeof($this->matrix_cells); //number of rows in the pattern
     $maxC = sizeof($this->matrix_cells[0]); //number of columns in the pattern
     define('R', $maxR);
     define('C', $maxC);
+    //$this->validate_pattern();
     
   }
 
   public function set_pattern()
   {
+    #save pattern file
     // Open a file in write mode ('w')
     $fp = fopen(path_file_pattern, 'w');
 

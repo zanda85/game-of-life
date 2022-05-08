@@ -52,6 +52,8 @@ class View
     public function outputbg()
     {
 
+        #vista gd
+
         $bgobj = new bg();
         //create image
         $bgobj->create_img(C, R, 20);
@@ -76,7 +78,7 @@ class View
 
     public function output()
     {
-
+        # Vista console
         
         for ($i = 0; $i <= R - 1; ++$i) {
             for ($j = 0; $j <= C - 1; ++$j) {

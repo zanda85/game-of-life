@@ -4,12 +4,18 @@
 
 
 
-class bg
+class Defaultbg
 {
+    #classe di default per creare l'immagine 
 
-    private $img; // image
-    private $dim; // width symbol 
+    public $img; // image
+    public $dim; // width symbol 
 
+
+    public function __construct(int $x, int $y, int $dim_r){
+
+        $this->create_img($x,$y,$dim_r);
+    }
 
     public function create_img(int $x, int $y, int $dim_r)
     {
@@ -21,34 +27,6 @@ class bg
         $this->name_img = "life"; // image name file 
     }
 
-    public function draw_rectangle(int $x1, int $y1, $color,int $fill=0)
-    {
-        $x1 = $x1 * $this->dim;
-        $y1 = $y1 * $this->dim;
-
-        #set $fill =1 to have filled rectangle 
-        if($fill){
-            imagefilledrectangle($this->img, $x1, $y1, $x1 + $this->dim, $y1 + $this->dim, $color);
-        }else{
-            imageRectangle($this->img, $x1, $y1, $x1 + $this->dim, $y1 + $this->dim, $color);
-        } 
-    }
-
-
-    public function draw_ellipse(int $x1, int $y1, $color,int $fill=0)
-    {
-        $x1 = ($x1 * $this->dim)+$this->dim/2;
-        $y1 = ($y1 * $this->dim)+$this->dim/2;
-
-        #set $fill =1 to have filled rectangle 
-        if($fill){
-            imagefilledellipse($this->img, $x1, $y1,$this->dim/2, $this->dim/2, $color);
-        }else{
-            imageellipse($this->img, $x1, $y1,$this->dim/2, $this->dim/2, $color);
-        }
-    }
-
-
     public function saveImage()
     {
         imagejpeg($this->img, "./media/img/" . $this->name_img . ".jpg");
@@ -56,62 +34,118 @@ class bg
 }
 
 
+class rectangle extends Defaultbg{
+
+    #class symbol rectangle
+    public function draw_symbol(int $x1, int $y1, $color){
+        $x1 = $x1 * $this->dim;
+        $y1 = $y1 * $this->dim;
+
+        
+        imageRectangle($this->img, $x1, $y1, $x1 + $this->dim, $y1 + $this->dim, $color);
+        
+
+    }
 
 
-class View
+}
+
+class rectanglefilled extends Defaultbg{
+
+    #class symbol rectanglefilled
+    public function draw_symbol(int $x1, int $y1, $color){
+        $x1 = $x1 * $this->dim;
+        $y1 = $y1 * $this->dim;
+
+        imagefilledrectangle($this->img, $x1, $y1, $x1 + $this->dim, $y1 + $this->dim, $color);
+       
+
+    }
+
+
+}
+
+class circle extends Defaultbg{
+
+    #class symbol circle
+    public function draw_symbol(int $x1, int $y1, $color){
+        $x1 = ($x1 * $this->dim)+$this->dim/2;
+        $y1 = ($y1 * $this->dim)+$this->dim/2;
+
+        imageellipse($this->img, $x1, $y1,$this->dim/2, $this->dim/2, $color);
+        
+    }
+
+
+}
+
+class circlefilled extends Defaultbg{
+
+    #class symbol circlefilled
+    public function draw_symbol(int $x1, int $y1, $color){
+        $x1 = ($x1 * $this->dim)+$this->dim/2;
+        $y1 = ($y1 * $this->dim)+$this->dim/2;
+
+        imagefilledellipse($this->img, $x1, $y1,$this->dim/2, $this->dim/2, $color);
+       
+    }
+
+
+}
+
+
+
+
+class View{
+
+    #class default View
+
+    protected $controller;
+
+    public function __construct($controller){
+        $this->controller = $controller;
+
+        $this->output_main();
+    }
+
+    public function output_main(){
+
+    }
+    
+}
+
+
+
+
+class ViewGD extends View
 {
 
-    
-    private $controller;
-
+    #class gd library 
     public function __construct($controller,$symbol)
     {
         $this->controller = $controller;
 
         #
         #View gd
-        $this->outputbg($symbol);
+        $this->output_main_symbol($symbol);
 
-        #View console
-        #$view->output();
+       
 
     }
 
-    public function outputbg(int $mode)
+    public function output_main_symbol(string $mode)
     {
 
         #vista gd
-        $bgobj = new bg();
-        //create image
-        $bgobj->create_img(C, R, 20);
+        #factory della classe
+        $bgobj = new $mode(C, R, 20);
+       
 
         // create symbols
         for ($i = 0; $i <= R - 1; ++$i) {
             for ($j = 0; $j <= C - 1; ++$j) {
                 if ($this->controller->matrix_cells[$i][$j] == "*") {
-                    switch ($mode) {
-                        case '0':
-                            #mode 0 = rectangle
-                            $bgobj->draw_rectangle($j, $i, $bgobj->rect_color,0);
-                            break;
-                        case '1':
-                            #mode 0 = rectangle
-                            $bgobj->draw_rectangle($j, $i, $bgobj->rect_color,1);
-                            break;
-                        case '2':
-                            #mode 0 = rectangle
-                            $bgobj->draw_ellipse($j, $i, $bgobj->rect_color,0);
-                            break;
-                        case '3':
-                            #mode 0 = rectangle
-                            $bgobj->draw_ellipse($j, $i, $bgobj->rect_color,1);
-                            break;
-                        
-                        default:
-                            # code...
-                            $bgobj->draw_ellipse($j, $i, $bgobj->rect_color,1);
-                            break;
-                    }
+                    $bgobj->draw_symbol($j, $i, $bgobj->rect_color);
                     
                 }
             }
@@ -124,8 +158,27 @@ class View
         echo "<img src=\"./media/img/" . $bgobj->name_img . ".jpg\">";
     }
 
+}
 
-    public function output()
+
+
+class ViewConsole extends View{
+
+    #View Console
+
+    // public function __construct($controller,$symbol=null)
+    // {
+    //     $this->controller = $controller;
+
+    //     #View console
+    //     $this->output_main();
+
+       
+
+    // }
+
+
+    public function output_main()
     {
         # Vista console
         
@@ -136,4 +189,7 @@ class View
             echo "\n";
         }
     }
+
+
+
 }

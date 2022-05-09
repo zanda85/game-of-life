@@ -11,11 +11,13 @@ $controller = new ControllerLife();
 
 
 #symbol 0 = rectangle
-#symbol 1 = rectangle filled
+#symbol 1 = rectanglefilled
 #symbol 2 = circle
-#symbol 3 = circle filled 
+#symbol 3 = circlefilled 
 
-$symbol=2;
-$view = new View($controller,$symbol);
+$symbol='circle';
+$view = new ViewGD($controller,$symbol);
+
+#$view = new ViewConsole($controller);
 
 ?>

@@ -34,7 +34,7 @@ class Defaultbg
 }
 
 
-class rectangle extends Defaultbg{
+class Rectangle extends Defaultbg{
 
     #class symbol rectangle
     public function draw_symbol(int $x1, int $y1, $color){
@@ -50,7 +50,7 @@ class rectangle extends Defaultbg{
 
 }
 
-class rectanglefilled extends Defaultbg{
+class Rectanglefilled extends Defaultbg{
 
     #class symbol rectanglefilled
     public function draw_symbol(int $x1, int $y1, $color){
@@ -65,7 +65,7 @@ class rectanglefilled extends Defaultbg{
 
 }
 
-class circle extends Defaultbg{
+class Circle extends Defaultbg{
 
     #class symbol circle
     public function draw_symbol(int $x1, int $y1, $color){
@@ -79,7 +79,7 @@ class circle extends Defaultbg{
 
 }
 
-class circlefilled extends Defaultbg{
+class Circlefilled extends Defaultbg{
 
     #class symbol circlefilled
     public function draw_symbol(int $x1, int $y1, $color){
@@ -138,6 +138,7 @@ class ViewGD extends View
 
         #vista gd
         #factory della classe
+        $mode=ucfirst($mode);
         $bgobj = new $mode($this->controller->c, $this->controller->r, 20);
        
 

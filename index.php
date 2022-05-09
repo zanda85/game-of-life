@@ -3,8 +3,11 @@
 #Game of Life
 #Simone Zanda
 
-include "./Controllers/ControllerLife.php";
-include "./Views/ViewLife.php";
+
+
+include_once( "./Controllers/ControllerLife.php");
+include_once("./Views/ViewGd.php");
+include_once ("./Views/ViewConsole.php");
 
 
 $controller = new ControllerLife();
@@ -17,6 +20,7 @@ $controller = new ControllerLife();
 
 
 $symbol='circle';
+
 $view = new ViewGD($controller,$symbol);
 
 

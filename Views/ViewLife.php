@@ -138,12 +138,12 @@ class ViewGD extends View
 
         #vista gd
         #factory della classe
-        $bgobj = new $mode(C, R, 20);
+        $bgobj = new $mode($this->controller->c, $this->controller->r, 20);
        
 
         // create symbols
-        for ($i = 0; $i <= R - 1; ++$i) {
-            for ($j = 0; $j <= C - 1; ++$j) {
+        for ($i = 0; $i <= $this->controller->r - 1; ++$i) {
+            for ($j = 0; $j <= $this->controller->c - 1; ++$j) {
                 if ($this->controller->matrix_cells[$i][$j] == "*") {
                     $bgobj->draw_symbol($j, $i, $bgobj->rect_color);
                     
@@ -172,8 +172,8 @@ class ViewConsole extends View{
     {
         # Vista console
         
-        for ($i = 0; $i <= R - 1; ++$i) {
-            for ($j = 0; $j <= C - 1; ++$j) {
+        for ($i = 0; $i <= $this->controller->r - 1; ++$i) {
+            for ($j = 0; $j <= $this->controller->c - 1; ++$j) {
                 echo $this->controller->matrix_cells[$i][$j];
             }
             echo "\n";

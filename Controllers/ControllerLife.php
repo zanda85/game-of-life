@@ -12,6 +12,9 @@ class ControllerLife
 
   public $matrix_cells = [];
 
+  public $r;
+  public $c;
+
   function __construct()
   {
     //get pattern matrix
@@ -31,11 +34,9 @@ class ControllerLife
     #prelievo del pattern dal file
     //map csv to array
     $this->matrix_cells = array_map('str_getcsv', file(path_file_pattern));
-    $maxR = sizeof($this->matrix_cells); //number of rows in the pattern
-    $maxC = sizeof($this->matrix_cells[0]); //number of columns in the pattern
-    define('R', $maxR);
-    define('C', $maxC);
-    //$this->validate_pattern();
+    $this->r = sizeof($this->matrix_cells); //number of rows in the pattern
+    $this->c = sizeof($this->matrix_cells[0]); //number of columns in the pattern
+
     
   }
 

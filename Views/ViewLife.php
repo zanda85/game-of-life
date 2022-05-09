@@ -166,16 +166,6 @@ class ViewConsole extends View{
 
     #View Console
 
-    // public function __construct($controller,$symbol=null)
-    // {
-    //     $this->controller = $controller;
-
-    //     #View console
-    //     $this->output_main();
-
-       
-
-    // }
 
 
     public function output_main()

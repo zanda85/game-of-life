@@ -19,7 +19,7 @@ $controller = new ControllerLife();
 #symbol 3 = circlefilled 
 
 
-$symbol='circle';
+$symbol='circlefilled';
 
 $view = new ViewGD($controller,$symbol);
 

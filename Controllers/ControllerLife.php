@@ -1,7 +1,7 @@
 <?php
 
 
-define('path_file_pattern', './data/initial_struct.csv');
+define('path_file_pattern', './data/initial_struct.txt');
 
 
 
@@ -33,11 +33,9 @@ class ControllerLife
   {
     #prelievo del pattern dal file
     //map csv to array
-    $this->matrix_cells = array_map('str_getcsv', file(path_file_pattern));
+    $this->matrix_cells = array_map('str_split', file(path_file_pattern));
     $this->r = sizeof($this->matrix_cells); //number of rows in the pattern
-    $this->c = sizeof($this->matrix_cells[0]); //number of columns in the pattern
-
-    
+    $this->c = sizeof($this->matrix_cells[0])-1; //number of columns in the pattern , remove \n
   }
 
   public function set_pattern()
@@ -47,10 +45,13 @@ class ControllerLife
     $fp = fopen(path_file_pattern, 'w');
 
     // Loop through file pointer and a line
-    foreach ($this->matrix_cells as $fields) {
-      fputcsv($fp, $fields);
-    }
 
+    for ($i = 0; $i < $this->r ; ++$i) {
+      for ($j = 0; $j < $this->c ; ++$j) {
+        fwrite($fp,$this->matrix_cells[$i][$j]);
+      }
+      fwrite($fp,"\n");
+  }
     fclose($fp);
   }
 
